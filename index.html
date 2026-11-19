@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snowlark</title>
+<meta name="description" content="Snowlark is a new web browser, built from the web's specifications. Coming soon.">
+<style>
+  :root { color-scheme: light dark; --bg: #f7f8fa; --fg: #14161a; --muted: #5b6270; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #0e1013; --fg: #eef1f5; --muted: #9aa3b2; } }
+  html, body { height: 100%; margin: 0; }
+  body {
+    display: grid; place-items: center; background: var(--bg); color: var(--fg);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { padding: 24px; text-align: center; max-width: 36rem; }
+  h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 0.25em; }
+  p { margin: 0.5em 0; color: var(--muted); font-size: 1.125rem; }
+  .soon { margin-top: 1.5em; font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Snowlark</h1>
+  <p>A new web browser, built from the web's specifications.</p>
+  <p class="soon">Coming soon</p>
+</main>
+</body>
+</html>
