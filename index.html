@@ -4,26 +4,193 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Snowlark</title>
-<meta name="description" content="Snowlark is a new web browser, built from the web's specifications. Coming soon.">
+<meta name="description" content="Snowlark is a new web browser engine written in Rust, built from the web's specifications and made for speed.">
 <style>
-  :root { color-scheme: light dark; --bg: #f7f8fa; --fg: #14161a; --muted: #5b6270; }
-  @media (prefers-color-scheme: dark) { :root { --bg: #0e1013; --fg: #eef1f5; --muted: #9aa3b2; } }
-  html, body { height: 100%; margin: 0; }
-  body {
-    display: grid; place-items: center; background: var(--bg); color: var(--fg);
-    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  :root {
+    color-scheme: light dark;
+    --bg: #f7f8fa; --panel: #ffffff; --fg: #14161a; --muted: #5b6270; --line: #e2e5ea;
+    --accent: #2f6fdf; --bar: #2f6fdf; --bar-ref: #b8c0cc;
   }
-  main { padding: 24px; text-align: center; max-width: 36rem; }
-  h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 0.25em; }
-  p { margin: 0.5em 0; color: var(--muted); font-size: 1.125rem; }
-  .soon { margin-top: 1.5em; font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0e1013; --panel: #161a20; --fg: #eef1f5; --muted: #9aa3b2; --line: #262c35;
+      --accent: #6ea0ff; --bar: #6ea0ff; --bar-ref: #3a424f;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 56rem; margin: 0 auto; padding: 0 16px; }
+  header { padding: 72px 0 40px; text-align: center; }
+  h1 { font-size: clamp(2.5rem, 8vw, 4rem); letter-spacing: -0.02em; margin: 0 0 0.2em; }
+  .lead { color: var(--muted); font-size: 1.2rem; margin: 0 auto; max-width: 36rem; }
+  .links { margin-top: 1.5em; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .button {
+    display: inline-block; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: 600;
+    border: 1px solid var(--line); background: var(--panel); color: var(--fg);
+  }
+  .button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  nav.toc { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 2em; font-size: 0.95rem; }
+  section { padding: 40px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 1.6rem; margin: 0 0 0.6em; }
+  h3 { font-size: 1.1rem; margin: 1.6em 0 0.4em; }
+  p { margin: 0.6em 0; }
+  .muted { color: var(--muted); }
+  .small { font-size: 0.9rem; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 16px; margin-top: 1em; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+  .big { font-size: 2.2rem; font-weight: 700; line-height: 1.1; }
+  .bars { margin-top: 0.8em; }
+  .bar-row { display: grid; grid-template-columns: 9rem 1fr 3.5rem; gap: 10px; align-items: center; margin: 8px 0; }
+  .bar-track { background: transparent; height: 14px; border-radius: 7px; overflow: hidden; }
+  .bar { height: 100%; border-radius: 7px; background: var(--bar); }
+  .bar.ref { background: var(--bar-ref); }
+  .bar-val { text-align: right; font-variant-numeric: tabular-nums; }
+  table { width: 100%; border-collapse: collapse; margin-top: 0.8em; font-size: 0.95rem; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  ul { padding-left: 1.2em; }
+  li { margin: 0.35em 0; }
+  .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 1em 0; }
+  .step { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; font-weight: 600; font-size: 0.95rem; }
+  .arrow { color: var(--muted); }
+  code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 0.92em; }
+  footer { padding: 40px 0 60px; border-top: 1px solid var(--line); text-align: center; }
+  @media (max-width: 30rem) { .bar-row { grid-template-columns: 6.5rem 1fr 3rem; } }
 </style>
 </head>
 <body>
-<main>
+
+<header class="wrap">
   <h1>Snowlark</h1>
-  <p>A new web browser, built from the web's specifications.</p>
-  <p class="soon">Coming soon</p>
+  <p class="lead">A new web browser engine written in Rust, built from the web's specifications and made for speed.</p>
+  <div class="links">
+    <a class="button primary" href="https://github.com/snowlark-browser">Snowlark on GitHub</a>
+  </div>
+  <nav class="toc">
+    <a href="#progress">Progress</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#principles">Principles</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+<section id="progress">
+  <h2>Progress</h2>
+  <p class="muted">Snowlark is in active development on Windows. These numbers come from one development machine and move every day.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="muted small">Web Platform Tests, subtests passing</div>
+      <div class="big">89.7%</div>
+      <div class="small muted">484,384 of 539,958 subtests in 15,274 test files; 9,513 files pass in full. Full run of 15 November 2026.</div>
+    </div>
+    <div class="card">
+      <div class="muted small">Speedometer 3.1, in the browser window</div>
+      <div class="big">28.3</div>
+      <div class="small muted">Up from 19.0 on 15 November. Chrome on the same machine: 35.4.</div>
+    </div>
+    <div class="card">
+      <div class="muted small">Speedometer 3.1, headless</div>
+      <div class="big">&asymp;35</div>
+      <div class="small muted">Chrome headless on the same machine: &asymp;38. Headless runs leave out the window's drawing.</div>
+    </div>
+  </div>
+
+  <h3>Speedometer 3.1 in the window (higher is better)</h3>
+  <div class="bars" role="img" aria-label="Speedometer 3.1 in the window: Snowlark 19.0 on 15 November, 28.3 on 18 November; Chrome 35.4.">
+    <div class="bar-row"><span>Snowlark, 15 Nov</span><div class="bar-track"><div class="bar" style="width: 53.7%"></div></div><span class="bar-val">19.0</span></div>
+    <div class="bar-row"><span>Snowlark, 18 Nov</span><div class="bar-track"><div class="bar" style="width: 79.9%"></div></div><span class="bar-val">28.3</span></div>
+    <div class="bar-row"><span>Chrome</span><div class="bar-track"><div class="bar ref" style="width: 100%"></div></div><span class="bar-val">35.4</span></div>
+  </div>
+
+  <h3>Web Platform Tests by area</h3>
+  <p class="small muted">The testharness tests of the areas we run (reftests are not counted here).</p>
+  <table>
+    <thead><tr><th>Area</th><th class="num">Passing</th><th class="num">Subtests</th><th class="num">Share</th></tr></thead>
+    <tbody>
+      <tr><td>URL</td><td class="num">11,002</td><td class="num">11,006</td><td class="num">100.0%</td></tr>
+      <tr><td>Encoding</td><td class="num">23,639</td><td class="num">23,657</td><td class="num">99.9%</td></tr>
+      <tr><td>Selection API</td><td class="num">34,236</td><td class="num">34,421</td><td class="num">99.5%</td></tr>
+      <tr><td>DOM</td><td class="num">61,993</td><td class="num">63,286</td><td class="num">98.0%</td></tr>
+      <tr><td>SVG</td><td class="num">13,513</td><td class="num">13,807</td><td class="num">97.9%</td></tr>
+      <tr><td>CSS Backgrounds</td><td class="num">5,984</td><td class="num">6,236</td><td class="num">96.0%</td></tr>
+      <tr><td>HTML</td><td class="num">90,057</td><td class="num">97,708</td><td class="num">92.2%</td></tr>
+      <tr><td>CSS Selectors</td><td class="num">5,446</td><td class="num">6,044</td><td class="num">90.1%</td></tr>
+      <tr><td>Editing</td><td class="num">101,380</td><td class="num">116,472</td><td class="num">87.0%</td></tr>
+      <tr><td>CSS Sizing</td><td class="num">5,537</td><td class="num">6,347</td><td class="num">87.2%</td></tr>
+      <tr><td>CSS Grid</td><td class="num">13,622</td><td class="num">15,841</td><td class="num">86.0%</td></tr>
+      <tr><td>Fetch</td><td class="num">5,908</td><td class="num">7,078</td><td class="num">83.5%</td></tr>
+      <tr><td>CSS Fonts</td><td class="num">6,900</td><td class="num">8,646</td><td class="num">79.8%</td></tr>
+      <tr><td>Shadow DOM</td><td class="num">11,737</td><td class="num">15,324</td><td class="num">76.6%</td></tr>
+      <tr><td>CSS Masking</td><td class="num">4,544</td><td class="num">6,393</td><td class="num">71.1%</td></tr>
+      <tr><td>CSS Values</td><td class="num">6,073</td><td class="num">10,325</td><td class="num">58.8%</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Recent work</h3>
+  <ul>
+    <li>2D canvas: images drawn with <code>drawImage</code> stay on the GPU between draws; a page that drew at 2 frames a second now runs at the display's 180.</li>
+    <li>Fixed headers and banners move separately from the page while scrolling, and areas not yet drawn show the page's own background.</li>
+    <li>Animation frames at the display's full refresh rate on pages that read media queries every frame.</li>
+    <li>Style results kept across restyles, and faster style sharing between similar elements.</li>
+    <li>Line breaking a word at a time, and a font cache shared across a page.</li>
+    <li>No blank flash on in-page navigations; <code>::selection</code> colours and grid item heights as the specs define them.</li>
+  </ul>
+</section>
+
+<section id="architecture">
+  <h2>Architecture</h2>
+  <p>Snowlark keeps the page's document tree in native Rust and makes the step between JavaScript and that tree nearly free, as the major engines do. Rust gives C++-class speed without C++'s memory-safety bugs, which matters because security comes first. It also lets the engine build on proven open-source components.</p>
+
+  <h3>How a page flows through the engine</h3>
+  <div class="flow" aria-label="Network, then HTML parser, then DOM and JavaScript, then style, then layout, then paint, then compositor">
+    <span class="step">Network</span><span class="arrow">&rarr;</span>
+    <span class="step">HTML parser</span><span class="arrow">&rarr;</span>
+    <span class="step">DOM + JavaScript</span><span class="arrow">&rarr;</span>
+    <span class="step">Style</span><span class="arrow">&rarr;</span>
+    <span class="step">Layout</span><span class="arrow">&rarr;</span>
+    <span class="step">Paint</span><span class="arrow">&rarr;</span>
+    <span class="step">Compositor</span>
+  </div>
+
+  <table>
+    <thead><tr><th>Part</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td>JavaScript</td><td>V8, embedded directly. Every JavaScript-visible interface is generated from the specifications' Web IDL, never written by hand, and hot properties take V8's fast path straight into Rust.</td></tr>
+      <tr><td>DOM</td><td>One arena of nodes per event loop, with ids that carry a generation, so a stale reference can never reach a reused node.</td></tr>
+      <tr><td>Style</td><td>Stylo, Firefox's style system: the cascade, computed values, invalidation and parallel restyling.</td></tr>
+      <tr><td>Layout</td><td>Block, inline, table, positioned layout and text are our own; flex and grid use Taffy. Each layout produces an immutable fragment tree, so unchanged parts are reused.</td></tr>
+      <tr><td>Paint and compositing</td><td>Display lists drawn with Direct2D on a raster thread per tab, in tiles, composited on the GPU at the display's refresh rate.</td></tr>
+      <tr><td>Network</td><td>HTTP/1.1 and HTTP/2 over TLS, cookies, cache, HSTS, Content Security Policy and mixed-content blocking.</td></tr>
+      <tr><td>Process isolation</td><td>Each tab's page runs in a renderer process of its own; the browser and its pages talk in plain-data messages.</td></tr>
+      <tr><td>Storage and media</td><td>IndexedDB, Web Audio and video, each in its own component.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Built with</h3>
+  <p class="small">V8 (through Deno's <code>rusty_v8</code>), html5ever, cssparser and selectors from Servo, Stylo and encoding_rs from Firefox, the <code>url</code> crate, Taffy, resvg, and Windows' Direct2D, DirectWrite, DirectComposition and Media Foundation.</p>
+</section>
+
+<section id="principles">
+  <h2>Principles</h2>
+  <ul>
+    <li><strong>User security first,</strong> then speed on real, script-heavy pages, then style and layout throughput.</li>
+    <li><strong>Specifications are the source of truth.</strong> Behaviour is implemented from the WHATWG and W3C texts and checked against the Web Platform Tests.</li>
+    <li><strong>Every speed claim is measured,</strong> before and after, on the same machine, against Chrome.</li>
+  </ul>
+</section>
+
 </main>
+
+<footer class="wrap small muted">
+  Snowlark &middot; <a href="https://github.com/snowlark-browser">github.com/snowlark-browser</a>
+</footer>
+
 </body>
 </html>
