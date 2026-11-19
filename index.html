@@ -73,6 +73,7 @@
   </div>
   <nav class="toc">
     <a href="#progress">Progress</a>
+    <a href="#blocking">Ad blocking</a>
     <a href="#architecture">Architecture</a>
     <a href="#principles">Principles</a>
   </nav>
@@ -141,6 +142,16 @@
     <li>Style results kept across restyles, and faster style sharing between similar elements.</li>
     <li>Line breaking a word at a time, and a font cache shared across a page.</li>
     <li>No blank flash on in-page navigations; <code>::selection</code> colours and grid item heights as the specs define them.</li>
+  </ul>
+</section>
+
+<section id="blocking">
+  <h2>Native ad blocking</h2>
+  <p>Ad and tracker blocking is built into the browser itself, with no extension to install.</p>
+  <ul>
+    <li><strong>The same public filter lists uBlock Origin uses by default:</strong> EasyList, EasyPrivacy, uBlock Origin's own lists and more, kept up to date automatically.</li>
+    <li><strong>Full filter syntax:</strong> network requests are blocked before they leave the browser, page elements are hidden with cosmetic filters, and scriptlet filters neutralise ad scripts.</li>
+    <li><strong>Your own filters:</strong> add custom filters, or subscribe to further lists and hosts files, in the browser's settings.</li>
   </ul>
 </section>
 
