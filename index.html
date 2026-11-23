@@ -79,13 +79,14 @@
   <h1>Snowlark</h1>
   <p class="lead">A fast, private web browser for Windows.</p>
   <div class="links">
-    <a class="button primary" href="https://github.com/snowlark-browser/snowlark/releases/download/preview-2026-11-22/snowlark-preview-2026-11-22-c1cb0259.zip">Download preview for Windows</a>
+    <a class="button primary" href="https://github.com/snowlark-browser/snowlark/releases/download/preview-2026-11-23/snowlark-preview-2026-11-23-d87d34c9.zip">Download preview for Windows</a>
     <a class="button" href="https://github.com/snowlark-browser/snowlark">Source on GitHub</a>
   </div>
-  <p class="small muted">Preview of 22 November 2026 &middot; Windows 10 and 11, 64-bit &middot; 44 MB &middot; signed by SVEA IKT AB &middot; <a href="https://github.com/snowlark-browser/snowlark/releases/tag/preview-2026-11-22">release notes</a></p>
+  <p class="small muted">Preview of 23 November 2026 &middot; Windows 10 and 11, 64-bit &middot; 44 MB &middot; signed by SVEA IKT AB &middot; <a href="https://github.com/snowlark-browser/snowlark/releases/tag/preview-2026-11-23">release notes</a></p>
   <nav class="toc">
     <a href="#screenshots">Screenshots</a>
     <a href="#progress">Progress</a>
+    <a href="#roadmap">Roadmap</a>
     <a href="#blocking">Ad blocking</a>
     <a href="#architecture">Architecture</a>
     <a href="#principles">Principles</a>
@@ -172,12 +173,43 @@
 
   <h3>Recent work</h3>
   <ul>
-    <li>Incognito windows (Ctrl+Shift+N): cookies, site data, history and the downloads list stay in memory, and nothing of theirs is written to the profile.</li>
-    <li>A downloads page (<code>snowlark://downloads</code>, Ctrl+J) with history, search, Show in folder, Copy link and Clear all.</li>
-    <li><code>progress</code> and <code>meter</code> styled with <code>appearance: none</code> draw their bar and value, as pages style them.</li>
-    <li>Faster DOM insertion and removal: inserted and removed subtrees carry a summary of what they hold, and custom element reactions check an element's kind once.</li>
-    <li>Restyles of 64 elements or more run in parallel, and <code>::before</code> and <code>::after</code> are no longer styled when no rule gives them content.</li>
-    <li>2D canvas: images drawn with <code>drawImage</code> stay on the GPU between draws; a page that drew at 2 frames a second now runs at the display's 180.</li>
+    <li>A built-in password manager, first stage: Snowlark offers to save a password after you sign in and fills it on your next visit, stored encrypted; <code>snowlark://passwords</code> lists them and shows one only after Windows Hello confirms it is you.</li>
+    <li>Smooth wheel scrolling, for pages and for scrolling areas inside them.</li>
+    <li>Scroll anchoring: what you are reading stays in place when content above it loads or changes size.</li>
+    <li>Downloads go straight to your Downloads folder, with a Downloads button in the toolbar.</li>
+    <li>An update check, off until you turn it on: it fetches a new preview, verifies its checksum and signature, and switches to it on the next start.</li>
+    <li>Pages that read layout while changing form controls or custom scroll bars no longer pay for the whole page each time.</li>
+  </ul>
+</section>
+
+<section id="roadmap">
+  <h2>Roadmap</h2>
+  <p class="muted">What is being built now, and what comes next. The order of the next items comes from measurement: each area is ranked by how many of 105 popular websites it breaks today, then by the Web Platform Tests it fails.</p>
+
+  <h3>In progress and up next</h3>
+  <ul>
+    <li><strong>WebGL,</strong> on ANGLE: 3D content, maps and product viewers.</li>
+    <li><strong>Safer web fonts:</strong> every downloaded font checked by OTS, the OpenType sanitizer, before Windows sees it.</li>
+    <li><strong>New image decoding:</strong> PNG, JPEG, GIF, WebP, AVIF and JPEG XL decoded in Rust, with colour profiles applied.</li>
+  </ul>
+
+  <h3>Next, in order of measured impact</h3>
+  <ol>
+    <li><strong>Flex layout:</strong> navigation bars, card rows and buttons at the sizes and places sites expect.</li>
+    <li><strong>Scrolling:</strong> no blank strips during fast scrolls, and fixed and sticky headers that scroll smoothly.</li>
+    <li><strong>Fonts:</strong> text measured the same way the sites were designed with, so lines and labels break where they should.</li>
+    <li><strong>Forms:</strong> styled date fields, text areas that wrap and scroll, buttons laid out right.</li>
+    <li><strong>Text:</strong> alignment and balanced headlines as sites set them.</li>
+    <li><strong>Positioned content:</strong> badges, menus and overlays in their places.</li>
+    <li><strong>Entry animations</strong> (<code>@starting-style</code>): menus, dialogs and notices that fade or slide in.</li>
+    <li><strong>Selectors</strong> that some sites still rely on, and <strong>video captions</strong>.</li>
+  </ol>
+
+  <h3>Later</h3>
+  <ul>
+    <li><strong>Linux, then macOS,</strong> once the Windows version is complete. The engine is kept free of platform code, so each platform needs its own painting, text, window, media and sandbox parts.</li>
+    <li><strong>Password manager, next stage:</strong> a Windows sign-in prompt where Windows Hello is not set up, and importing passwords exported from other browsers.</li>
+    <li><strong>WebGPU,</strong> after WebGL.</li>
   </ul>
 </section>
 
