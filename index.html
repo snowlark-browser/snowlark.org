@@ -69,13 +69,55 @@
   .shots figcaption { color: var(--muted); font-size: 0.9rem; margin-top: 6px; }
   @media (max-width: 30rem) { .shots { grid-template-columns: 1fr; } }
   footer { padding: 40px 0 60px; border-top: 1px solid var(--line); text-align: center; }
+  footer nav { display: flex; gap: 8px 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 1em; }
   @media (max-width: 30rem) { .bar-row { grid-template-columns: 6.5rem 1fr 3rem; } }
+
+  /* A slim bar that stays at the top: the name, the sections and the download, wherever the reader is. */
+  .topbar {
+    position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+  }
+  .topbar .wrap { display: flex; align-items: center; gap: 20px; height: 56px; }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--fg); text-decoration: none; }
+  .topbar nav { display: flex; gap: 18px; margin-left: auto; font-size: 0.95rem; }
+  .topbar nav a { color: var(--muted); text-decoration: none; }
+  .topbar nav a:hover { color: var(--fg); }
+  .topbar .button { padding: 6px 14px; font-size: 0.92rem; }
+  @media (max-width: 44rem) { .topbar nav { display: none; } .topbar .button { margin-left: auto; } }
+  section[id], header[id] { scroll-margin-top: 64px; }
+
+  header .mark { display: block; margin: 0 auto 8px; }
+  .note { display: inline-block; margin-top: 1.2em; padding: 6px 12px; border: 1px solid var(--line); border-radius: 8px;
+          background: var(--panel); font-size: 0.9rem; color: var(--muted); }
+  .card h3 { margin: 0 0 0.3em; font-size: 1.05rem; }
+  .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+  ol.steps { padding-left: 1.4em; }
+  ol.steps li { margin: 0.5em 0; }
+
+  /* Keyboard users see where they are. */
+  a:focus-visible, .button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+  .skip { position: absolute; left: -999px; top: 8px; }
+  .skip:focus { left: 16px; z-index: 20; background: var(--panel); padding: 8px 12px; border-radius: 6px; }
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<header class="wrap">
-  <img src="favicon.svg" width="72" height="72" alt="" style="display:block;margin-bottom:8px">
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="favicon.svg" width="24" height="24" alt="">Snowlark</a>
+    <nav aria-label="Sections">
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#progress">Progress</a>
+    </nav>
+    <a class="button primary" href="https://github.com/snowlark-browser/snowlark/releases/download/preview-2026-11-23/snowlark-preview-2026-11-23-d87d34c9.zip">Download</a>
+  </div>
+</div>
+
+<header class="wrap" id="top">
+  <img class="mark" src="favicon.svg" width="72" height="72" alt="">
   <h1>Snowlark</h1>
   <p class="lead">A fast, private web browser for Windows.</p>
   <div class="links">
@@ -83,17 +125,10 @@
     <a class="button" href="https://github.com/snowlark-browser/snowlark">Source on GitHub</a>
   </div>
   <p class="small muted">Preview of 23 November 2026 &middot; Windows 10 and 11, 64-bit &middot; 44 MB &middot; signed by SVEA IKT AB &middot; <a href="https://github.com/snowlark-browser/snowlark/releases/tag/preview-2026-11-23">release notes</a></p>
-  <nav class="toc">
-    <a href="#screenshots">Screenshots</a>
-    <a href="#progress">Progress</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#blocking">Ad blocking</a>
-    <a href="#architecture">Architecture</a>
-    <a href="#principles">Principles</a>
-  </nav>
+  <p class="note">An early preview: many sites work, but expect pages that look wrong, missing features and the odd crash. <a href="https://github.com/snowlark-browser/snowlark/blob/main/KNOWN-ISSUES.md">Known issues</a></p>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="main">
 
 <section id="screenshots">
   <h2>Screenshots</h2>
@@ -115,6 +150,77 @@
       <figcaption>Wikipedia in an Incognito window.</figcaption>
     </figure>
   </div>
+</section>
+
+<section id="features">
+  <h2>Features</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Ad and tracker blocking, built in</h3>
+      <p>The public filter lists uBlock Origin uses by default (EasyList, EasyPrivacy and more), kept up to date, with network, cosmetic and scriptlet filters. Add your own filters and lists in settings. No extension to install.</p>
+    </div>
+    <div class="card">
+      <h3>Incognito windows</h3>
+      <p>Cookies, site data, history and downloads of an Incognito window stay in memory; nothing of theirs is written to your profile.</p>
+    </div>
+    <div class="card">
+      <h3>A password manager</h3>
+      <p>Offers to save a password when you sign in and fills it next time. Passwords are stored encrypted, and showing one needs Windows Hello.</p>
+    </div>
+    <div class="card">
+      <h3>Signed, with updates you choose</h3>
+      <p>Every preview is code-signed. Snowlark checks for updates only if you say yes, and verifies the download's checksum and signature before using it.</p>
+    </div>
+    <div class="card">
+      <h3>Nothing you did not ask for</h3>
+      <p>No built-in AI features, no cryptocurrency or wallet, and no search engine deals: DuckDuckGo is preset, and Google, Bing, Brave Search and Startpage are one setting away.</p>
+    </div>
+    <div class="card">
+      <h3>Open source</h3>
+      <p>The engine and the browser are open source under the Mozilla Public License 2.0, built from the web's specifications and tested against the Web Platform Tests.</p>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <h2>Install</h2>
+  <ol class="steps">
+    <li><a href="https://github.com/snowlark-browser/snowlark/releases/download/preview-2026-11-23/snowlark-preview-2026-11-23-d87d34c9.zip">Download the zip</a> (44 MB, Windows 10 or 11, 64-bit).</li>
+    <li>Unzip it anywhere and start <code>snowlark.exe</code>. There is no installer.</li>
+    <li>If Windows SmartScreen shows &ldquo;Windows protected your PC&rdquo; the first time, choose <em>More info</em>, then <em>Run anyway</em>: a new build has to earn its reputation first.</li>
+  </ol>
+  <p class="small muted">Your bookmarks, history, settings and cookies are kept in <code>%LOCALAPPDATA%\Snowlark</code>. To remove Snowlark, delete the unzipped folder and that data folder. Older previews are on the <a href="https://github.com/snowlark-browser/snowlark/releases">releases page</a>.</p>
+</section>
+
+<section id="roadmap">
+  <h2>Roadmap</h2>
+  <p class="muted">What is being built now, and what comes next. The order of the next items comes from measurement: each area is ranked by how many of 105 popular websites it breaks today, then by the Web Platform Tests it fails.</p>
+
+  <h3>In progress and up next</h3>
+  <ul>
+    <li><strong>WebGL,</strong> on ANGLE: 3D content, maps and product viewers.</li>
+    <li><strong>Safer web fonts:</strong> every downloaded font checked by OTS, the OpenType sanitizer, before Windows sees it.</li>
+    <li><strong>New image decoding:</strong> PNG, JPEG, GIF, WebP, AVIF and JPEG XL decoded in Rust, with colour profiles applied.</li>
+  </ul>
+
+  <h3>Next, in order of measured impact</h3>
+  <ol>
+    <li><strong>Flex layout:</strong> navigation bars, card rows and buttons at the sizes and places sites expect.</li>
+    <li><strong>Scrolling:</strong> no blank strips during fast scrolls, and fixed and sticky headers that scroll smoothly.</li>
+    <li><strong>Fonts:</strong> text measured the same way the sites were designed with, so lines and labels break where they should.</li>
+    <li><strong>Forms:</strong> styled date fields, text areas that wrap and scroll, buttons laid out right.</li>
+    <li><strong>Text:</strong> alignment and balanced headlines as sites set them.</li>
+    <li><strong>Positioned content:</strong> badges, menus and overlays in their places.</li>
+    <li><strong>Entry animations</strong> (<code>@starting-style</code>): menus, dialogs and notices that fade or slide in.</li>
+    <li><strong>Selectors</strong> that some sites still rely on, and <strong>video captions</strong>.</li>
+  </ol>
+
+  <h3>Later</h3>
+  <ul>
+    <li><strong>Linux, then macOS,</strong> once the Windows version is complete. The engine is kept free of platform code, so each platform needs its own painting, text, window, media and sandbox parts.</li>
+    <li><strong>Password manager, next stage:</strong> a Windows sign-in prompt where Windows Hello is not set up, and importing passwords exported from other browsers.</li>
+    <li><strong>WebGPU,</strong> after WebGL.</li>
+  </ul>
 </section>
 
 <section id="progress">
@@ -182,47 +288,6 @@
   </ul>
 </section>
 
-<section id="roadmap">
-  <h2>Roadmap</h2>
-  <p class="muted">What is being built now, and what comes next. The order of the next items comes from measurement: each area is ranked by how many of 105 popular websites it breaks today, then by the Web Platform Tests it fails.</p>
-
-  <h3>In progress and up next</h3>
-  <ul>
-    <li><strong>WebGL,</strong> on ANGLE: 3D content, maps and product viewers.</li>
-    <li><strong>Safer web fonts:</strong> every downloaded font checked by OTS, the OpenType sanitizer, before Windows sees it.</li>
-    <li><strong>New image decoding:</strong> PNG, JPEG, GIF, WebP, AVIF and JPEG XL decoded in Rust, with colour profiles applied.</li>
-  </ul>
-
-  <h3>Next, in order of measured impact</h3>
-  <ol>
-    <li><strong>Flex layout:</strong> navigation bars, card rows and buttons at the sizes and places sites expect.</li>
-    <li><strong>Scrolling:</strong> no blank strips during fast scrolls, and fixed and sticky headers that scroll smoothly.</li>
-    <li><strong>Fonts:</strong> text measured the same way the sites were designed with, so lines and labels break where they should.</li>
-    <li><strong>Forms:</strong> styled date fields, text areas that wrap and scroll, buttons laid out right.</li>
-    <li><strong>Text:</strong> alignment and balanced headlines as sites set them.</li>
-    <li><strong>Positioned content:</strong> badges, menus and overlays in their places.</li>
-    <li><strong>Entry animations</strong> (<code>@starting-style</code>): menus, dialogs and notices that fade or slide in.</li>
-    <li><strong>Selectors</strong> that some sites still rely on, and <strong>video captions</strong>.</li>
-  </ol>
-
-  <h3>Later</h3>
-  <ul>
-    <li><strong>Linux, then macOS,</strong> once the Windows version is complete. The engine is kept free of platform code, so each platform needs its own painting, text, window, media and sandbox parts.</li>
-    <li><strong>Password manager, next stage:</strong> a Windows sign-in prompt where Windows Hello is not set up, and importing passwords exported from other browsers.</li>
-    <li><strong>WebGPU,</strong> after WebGL.</li>
-  </ul>
-</section>
-
-<section id="blocking">
-  <h2>Native ad blocking</h2>
-  <p>Ad and tracker blocking is built into the browser itself, with no extension to install.</p>
-  <ul>
-    <li><strong>The same public filter lists uBlock Origin uses by default:</strong> EasyList, EasyPrivacy, uBlock Origin's own lists and more, kept up to date automatically.</li>
-    <li><strong>Full filter syntax:</strong> network requests are blocked before they leave the browser, page elements are hidden with cosmetic filters, and scriptlet filters neutralise ad scripts.</li>
-    <li><strong>Your own filters:</strong> add custom filters, or subscribe to further lists and hosts files, in the browser's settings.</li>
-  </ul>
-</section>
-
 <section id="architecture">
   <h2>Architecture</h2>
   <p>Snowlark keeps the page's document tree in native Rust and makes the step between JavaScript and that tree nearly free, as the major engines do. Rust gives C++-class speed without C++'s memory-safety bugs, which matters because security comes first. It also lets the engine build on proven open-source components.</p>
@@ -266,18 +331,19 @@
 
   <h3>Use of AI</h3>
   <p>Snowlark is developed with AI coding assistants, mainly Anthropic's Claude. They write most of the code and do much of the debugging, testing and benchmarking, directed by the project's maintainer. Every change has to pass the same checks whoever wrote it: the unit tests, the Web Platform Tests, and the speed benchmarks. The browser itself has no built-in AI features.</p>
-
-  <h3>What Snowlark leaves out</h3>
-  <ul>
-    <li><strong>No built-in AI features.</strong></li>
-    <li><strong>No cryptocurrency or wallet features.</strong></li>
-    <li><strong>No search engine deals.</strong> Nobody pays to be the default: DuckDuckGo is preset, and Google, Bing, Brave Search and Startpage are one setting away.</li>
-  </ul>
 </section>
 
 </main>
 
 <footer class="wrap small muted">
+  <nav aria-label="Links">
+    <a href="https://github.com/snowlark-browser/snowlark/releases">Releases</a>
+    <a href="https://github.com/snowlark-browser/snowlark">Source</a>
+    <a href="https://github.com/snowlark-browser/snowlark/blob/main/KNOWN-ISSUES.md">Known issues</a>
+    <a href="https://github.com/snowlark-browser/snowlark/issues">Report a problem</a>
+    <a href="https://github.com/snowlark-browser/snowlark/blob/main/SECURITY.md">Security</a>
+    <a href="https://github.com/snowlark-browser/snowlark/blob/main/LICENSE">Licence (MPL-2.0)</a>
+  </nav>
   Snowlark &middot; <a href="https://github.com/snowlark-browser">github.com/snowlark-browser</a>
 </footer>
 
