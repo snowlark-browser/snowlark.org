@@ -7,8 +7,8 @@
 <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="icon-512.png">
 <meta property="og:image" content="https://snowlark.org/icon-512.png">
-<title>Snowlark: a fast, private web browser for Windows</title>
-<meta name="description" content="Snowlark is a fast, private web browser for Windows, with ad and tracker blocking built in.">
+<title>Snowlark: a fast, private web browser for Windows and Linux</title>
+<meta name="description" content="Snowlark is a fast, private web browser for Windows, with Linux on its way, and ad and tracker blocking built in.">
 <style>
   :root {
     color-scheme: light dark;
@@ -119,12 +119,13 @@
 <header class="wrap" id="top">
   <img class="mark" src="favicon.svg" width="72" height="72" alt="">
   <h1>Snowlark</h1>
-  <p class="lead">A fast, private web browser for Windows.</p>
+  <p class="lead">A fast, private web browser for Windows, with Linux on its way.</p>
   <div class="links">
     <a class="button primary" href="https://github.com/snowlark-browser/snowlark/releases/download/preview-2026-11-25c/snowlark-preview-2026-11-25-6616417c.zip">Download preview for Windows</a>
     <a class="button" href="https://github.com/snowlark-browser/snowlark">Source on GitHub</a>
   </div>
   <p class="small muted">Preview of 25 November 2026 &middot; Windows 10 and 11, 64-bit &middot; 49 MB &middot; signed by SVEA IKT AB &middot; <a href="https://github.com/snowlark-browser/snowlark/releases/tag/preview-2026-11-25c">release notes</a></p>
+  <p class="small muted">Linux: no download yet. Snowlark already renders pages there without a window, and builds from source (<a href="https://github.com/snowlark-browser/snowlark#on-linux-in-progress">how</a>); the window is being built now.</p>
   <p class="note">An early preview: many sites work, but expect pages that look wrong, missing features and the odd crash. <a href="https://github.com/snowlark-browser/snowlark/blob/main/KNOWN-ISSUES.md">Known issues</a></p>
 </header>
 
@@ -198,6 +199,7 @@
     <li>If Windows SmartScreen shows &ldquo;Windows protected your PC&rdquo; the first time, choose <em>More info</em>, then <em>Run anyway</em>: a new build has to earn its reputation first.</li>
   </ol>
   <p class="small muted">Your bookmarks, history, settings and cookies are kept in <code>%LOCALAPPDATA%\Snowlark</code>. To remove Snowlark, delete the unzipped folder and that data folder. Older previews are on the <a href="https://github.com/snowlark-browser/snowlark/releases">releases page</a>.</p>
+  <p class="small muted">On Linux there is no preview to install yet: a .tar.gz comes once the window runs. Until then Snowlark builds from source with its headless modes; the <a href="https://github.com/snowlark-browser/snowlark#on-linux-in-progress">README</a> has the steps.</p>
 </section>
 
 <section id="roadmap">
@@ -208,7 +210,7 @@
   <ul>
     <li><strong>Service workers and the Cache API:</strong> sites that work offline, installable web apps and faster repeat visits.</li>
     <li><strong>Fixes for what breaks popular websites,</strong> found by comparing about 700 pages at two widths: card layouts with <code>aspect-ratio</code>, and content that stays hidden because an animation or a WebGL check never finishes.</li>
-    <li><strong>Linux:</strong> Snowlark renders pages without a window on Linux (V8 for Linux, text with fontconfig and HarfBuzz, painting with Skia); see the screenshots above. Now: separate processes for tabs. Then a Wayland window, WebGL, and a .tar.gz preview once it runs.</li>
+    <li><strong>Linux:</strong> Snowlark renders pages without a window on Linux (V8 for Linux, text with fontconfig and HarfBuzz, painting with Skia); see the screenshots above. The messaging between the browser and its tab processes works on Linux too. Now: a Wayland window, then separate processes for tabs, WebGL, and a .tar.gz preview once it runs.</li>
   </ul>
 
   <h3>Next</h3>
@@ -228,7 +230,7 @@
 
 <section id="progress">
   <h2>Progress</h2>
-  <p class="muted">Snowlark is in active development on Windows. These numbers come from one development machine and move every day.</p>
+  <p class="muted">Snowlark is in active development on Windows and Linux. These numbers, from the Windows build, come from one development machine and move every day.</p>
 
   <div class="cards">
     <div class="card">
@@ -333,7 +335,7 @@
       <tr><td>DOM</td><td>One arena of nodes per event loop, with ids that carry a generation, so a stale reference can never reach a reused node.</td></tr>
       <tr><td>Style</td><td>Stylo, Firefox's style system: the cascade, computed values, invalidation and parallel restyling.</td></tr>
       <tr><td>Layout</td><td>Block, inline, table, positioned layout and text are our own; flex and grid use Taffy. Each layout produces an immutable fragment tree, so unchanged parts are reused.</td></tr>
-      <tr><td>Paint and compositing</td><td>Display lists drawn with Direct2D on a raster thread per tab, in tiles, composited on the GPU at the display's refresh rate.</td></tr>
+      <tr><td>Paint and compositing</td><td>Display lists drawn on a raster thread per tab, in tiles, composited on the GPU at the display's refresh rate: with Direct2D on Windows, with Skia on Linux.</td></tr>
       <tr><td>Network</td><td>HTTP/1.1 and HTTP/2 over TLS, cookies, cache, HSTS, Content Security Policy and mixed-content blocking.</td></tr>
       <tr><td>Process isolation</td><td>Each tab's page runs in a renderer process of its own; the browser and its pages talk in plain-data messages.</td></tr>
       <tr><td>Storage and media</td><td>IndexedDB, Web Audio and video, each in its own component.</td></tr>
@@ -341,7 +343,7 @@
   </table>
 
   <h3>Built with</h3>
-  <p class="small">V8 (through Deno's <code>rusty_v8</code>), html5ever, cssparser and selectors from Servo, Stylo and encoding_rs from Firefox, the <code>url</code> crate, Taffy, resvg, and Windows' Direct2D, DirectWrite, DirectComposition and Media Foundation.</p>
+  <p class="small">V8 (through Deno's <code>rusty_v8</code>), html5ever, cssparser and selectors from Servo, Stylo and encoding_rs from Firefox, the <code>url</code> crate, Taffy, resvg, Windows' Direct2D, DirectWrite, DirectComposition and Media Foundation, and on Linux Skia, fontconfig, FreeType and HarfBuzz.</p>
 </section>
 
 <section id="principles">
