@@ -125,7 +125,7 @@
     <a class="button" href="https://github.com/snowlark-browser/snowlark">Source on GitHub</a>
   </div>
   <p class="small muted">Preview of 25 November 2026 &middot; Windows 10 and 11, 64-bit &middot; 49 MB &middot; signed by SVEA IKT AB &middot; <a href="https://github.com/snowlark-browser/snowlark/releases/tag/preview-2026-11-25c">release notes</a></p>
-  <p class="small muted">Linux: no download yet. Snowlark already renders pages there without a window, and builds from source (<a href="https://github.com/snowlark-browser/snowlark#on-linux-in-progress">how</a>); the window is being built now.</p>
+  <p class="small muted">Linux: no download yet. Snowlark already shows pages there in a Wayland window, and builds from source (<a href="https://github.com/snowlark-browser/snowlark#on-linux-in-progress">how</a>); the browser's own interface comes next.</p>
   <p class="note">An early preview: many sites work, but expect pages that look wrong, missing features and the odd crash. <a href="https://github.com/snowlark-browser/snowlark/blob/main/KNOWN-ISSUES.md">Known issues</a></p>
 </header>
 
@@ -151,12 +151,12 @@
       <figcaption>Google Maps' satellite view, drawn with WebGL: Central Park, New York.</figcaption>
     </figure>
     <figure>
-      <a href="screenshots/linux-wikipedia.webp"><img src="screenshots/linux-wikipedia.webp" width="1586" height="993" loading="lazy" alt="Wikipedia's article on web browsers, rendered by Snowlark on Linux without a window"></a>
-      <figcaption>On Linux, without a window: Wikipedia's "Web browser" article (Wikipedia, CC BY-SA 4.0).</figcaption>
+      <a href="screenshots/linux-wikipedia.webp"><img src="screenshots/linux-wikipedia.webp" width="1586" height="993" loading="lazy" alt="Wikipedia's article on web browsers in Snowlark's Wayland window on Linux"></a>
+      <figcaption>On Linux, in a Wayland window: Wikipedia's "Web browser" article (Wikipedia, CC BY-SA 4.0).</figcaption>
     </figure>
     <figure>
-      <a href="screenshots/linux-torvalds.webp"><img src="screenshots/linux-torvalds.webp" width="1586" height="993" loading="lazy" alt="Wikipedia's article on Linus Torvalds, rendered by Snowlark on Linux without a window"></a>
-      <figcaption>On Linux, without a window: Wikipedia's "Linus Torvalds" article (Wikipedia, CC BY-SA 4.0).</figcaption>
+      <a href="screenshots/linux-torvalds.webp"><img src="screenshots/linux-torvalds.webp" width="1586" height="993" loading="lazy" alt="Wikipedia's article on Linus Torvalds in Snowlark's Wayland window on Linux"></a>
+      <figcaption>On Linux, in a Wayland window: Wikipedia's "Linus Torvalds" article (Wikipedia, CC BY-SA 4.0).</figcaption>
     </figure>
   </div>
 </section>
@@ -210,7 +210,7 @@
   <ul>
     <li><strong>Service workers and the Cache API:</strong> sites that work offline, installable web apps and faster repeat visits.</li>
     <li><strong>Fixes for what breaks popular websites,</strong> found by comparing about 700 pages at two widths: card layouts with <code>aspect-ratio</code>, and content that stays hidden because an animation or a WebGL check never finishes.</li>
-    <li><strong>Linux:</strong> Snowlark renders pages without a window on Linux (V8 for Linux, text with fontconfig and HarfBuzz, painting with Skia); see the screenshots above. The messaging between the browser and its tab processes works on Linux too. Now: a Wayland window, then separate processes for tabs, WebGL, and a .tar.gz preview once it runs.</li>
+    <li><strong>Linux:</strong> Snowlark shows pages on Linux in a Wayland window, with mouse, wheel and keyboard (V8 for Linux, text with fontconfig and HarfBuzz, painting with Skia); see the screenshots above. The messaging between the browser and its tab processes works on Linux too. Now: the browser's interface (tabs, address bar), cursors and clipboard in that window, then separate processes for tabs, WebGL, and a .tar.gz preview once it runs.</li>
   </ul>
 
   <h3>Next</h3>
