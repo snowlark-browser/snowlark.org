@@ -149,6 +149,14 @@
       <a href="screenshots/incognito-wikipedia.webp"><img src="screenshots/incognito-wikipedia.webp" width="1586" height="993" loading="lazy" alt="A Snowlark Incognito window showing the Wikipedia article on the horned lark"></a>
       <figcaption>Wikipedia in an Incognito window.</figcaption>
     </figure>
+    <figure>
+      <a href="screenshots/linux-wikipedia.webp"><img src="screenshots/linux-wikipedia.webp" width="1586" height="993" loading="lazy" alt="Wikipedia's article on web browsers, rendered by Snowlark on Linux without a window"></a>
+      <figcaption>On Linux, without a window: Wikipedia's "Web browser" article (Wikipedia, CC BY-SA 4.0).</figcaption>
+    </figure>
+    <figure>
+      <a href="screenshots/linux-torvalds.webp"><img src="screenshots/linux-torvalds.webp" width="1586" height="993" loading="lazy" alt="Wikipedia's article on Linus Torvalds, rendered by Snowlark on Linux without a window"></a>
+      <figcaption>On Linux, without a window: Wikipedia's "Linus Torvalds" article (Wikipedia, CC BY-SA 4.0).</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -200,7 +208,7 @@
   <ul>
     <li><strong>Service workers and the Cache API:</strong> sites that work offline, installable web apps and faster repeat visits.</li>
     <li><strong>Fixes for what breaks popular websites,</strong> found by comparing about 700 pages at two widths: card layouts with <code>aspect-ratio</code>, and content that stays hidden because an animation or a WebGL check never finishes.</li>
-    <li><strong>Linux:</strong> the engine builds and passes its tests on Linux, and its painting code is split from the Windows parts. Now: running pages without a window on Linux (V8 for Linux, text with FreeType and HarfBuzz, painting with Skia). Then separate processes for tabs, a Wayland window, and a .tar.gz preview once it runs.</li>
+    <li><strong>Linux:</strong> Snowlark renders pages without a window on Linux (V8 for Linux, text with fontconfig and HarfBuzz, painting with Skia); see the screenshots above. Now: separate processes for tabs. Then a Wayland window, WebGL, and a .tar.gz preview once it runs.</li>
   </ul>
 
   <h3>Next</h3>
