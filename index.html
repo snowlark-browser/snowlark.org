@@ -211,7 +211,7 @@
   <ul>
     <li><strong>Service workers and the Cache API:</strong> sites that work offline, installable web apps and faster repeat visits.</li>
     <li><strong>Fixes for things you notice while browsing:</strong> dragging an element a page makes draggable selects text instead, a link opened in a background tab keeps its loading icon, an image opened on its own is not centred, and dragging the address to the desktop to make a shortcut.</li>
-    <li><strong>Linux:</strong> the browser runs on Linux in a Wayland window, with its tabs and address bar, each tab's pages in a process of their own, copy and paste with other programs, and several windows (V8 for Linux, text with fontconfig and HarfBuzz, painting with Skia); see the screenshots above. WebGL works too, and the first Linux preview is out (above). Now: input methods, saving passwords, drag and drop, video and audio, and a signed download.</li>
+    <li><strong>Linux:</strong> the browser runs on Linux in a Wayland window, with its tabs and address bar, each tab's pages in a process of their own, copy and paste with other programs, and several windows (V8 for Linux, text with fontconfig and HarfBuzz, painting with Skia); see the screenshots above. WebGL works too, and the first Linux preview is out (above). Since that preview, in the source: input methods, drops from other programs, saved passwords kept with the desktop's Secret Service, file dialogs, and video and audio through the system's FFmpeg. Now: Media Source Extensions (the video most streaming sites use), the sandbox for page processes, drawing on the GPU, and a signed download.</li>
   </ul>
 
   <h3>Next</h3>
@@ -345,7 +345,7 @@
   </table>
 
   <h3>Built with</h3>
-  <p class="small">V8 (through Deno's <code>rusty_v8</code>), html5ever, cssparser and selectors from Servo, Stylo and encoding_rs from Firefox, the <code>url</code> crate, Taffy, resvg, Windows' Direct2D, DirectWrite, DirectComposition and Media Foundation, and on Linux Skia, fontconfig, FreeType and HarfBuzz.</p>
+  <p class="small">V8 (through Deno's <code>rusty_v8</code>), html5ever, cssparser and selectors from Servo, Stylo and encoding_rs from Firefox, the <code>url</code> crate, Taffy, resvg, Windows' Direct2D, DirectWrite, DirectComposition and Media Foundation, and on Linux Skia, fontconfig, FreeType, HarfBuzz and FFmpeg.</p>
 </section>
 
 <section id="principles">
