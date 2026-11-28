@@ -126,7 +126,7 @@
     <a class="button" href="https://github.com/snowlark-browser/snowlark">Source on GitHub</a>
   </div>
   <p class="small muted">Windows: preview of 27 November 2026 &middot; Windows 10 and 11, 64-bit &middot; 50 MB &middot; signed by SVEA IKT AB &middot; <a href="https://github.com/snowlark-browser/snowlark/releases/tag/preview-2026-11-27">release notes</a></p>
-  <p class="small muted">Linux: preview of 27 November 2026 &middot; x86-64, a Wayland desktop, glibc 2.43 or newer (Ubuntu 26.04, Fedora 44, Debian testing) &middot; 51 MB &middot; signed with <a href="https://jedisct1.github.io/minisign/">minisign</a>, key <code>RWQa8wCIad8uYF2fHaCkxdIMZwB6HZOHKswRPVw+/Fws2jguH278vfXs</code> (<a href="https://github.com/snowlark-browser/snowlark/releases/download/preview-2026-11-27b-linux/snowlark-preview-2026-11-27-debcec4e-linux-x86_64.tar.gz.minisig">signature</a>, <a href="https://github.com/snowlark-browser/snowlark/releases/download/preview-2026-11-27b-linux/snowlark-preview-2026-11-27-debcec4e-linux-x86_64.tar.gz.sha256">SHA-256</a>) &middot; <a href="https://github.com/snowlark-browser/snowlark/releases/tag/preview-2026-11-27b-linux">release notes</a></p>
+  <p class="small muted">Linux: preview of 27 November 2026 &middot; x86-64, a Wayland desktop, glibc 2.43 or newer (Ubuntu 26.04, Fedora 44, Debian testing) &middot; 51 MB &middot; signed with <a href="https://jedisct1.github.io/minisign/">minisign</a> (<a href="https://github.com/snowlark-browser/snowlark/releases/download/preview-2026-11-27b-linux/snowlark-preview-2026-11-27-debcec4e-linux-x86_64.tar.gz.minisig">signature</a>, <a href="https://github.com/snowlark-browser/snowlark/releases/download/preview-2026-11-27b-linux/snowlark-preview-2026-11-27-debcec4e-linux-x86_64.tar.gz.sha256">SHA-256</a>) &middot; <a href="https://github.com/snowlark-browser/snowlark/releases/tag/preview-2026-11-27b-linux">release notes</a></p>
   <p class="note">An early preview: many sites work, but expect pages that look wrong, missing features and the odd crash. <a href="https://github.com/snowlark-browser/snowlark/blob/main/KNOWN-ISSUES.md">Known issues</a></p>
 </header>
 
@@ -175,7 +175,7 @@
     </div>
     <div class="card">
       <h3>A password manager</h3>
-      <p>Offers to save a password when you sign in and fills it next time. Passwords are stored encrypted, and showing one needs Windows Hello.</p>
+      <p>Offers to save a password when you sign in and fills it next time. Passwords are stored encrypted, and showing one asks for Windows Hello, or your Windows password where Hello is not set up.</p>
     </div>
     <div class="card">
       <h3>Signed, with updates you choose</h3>
@@ -187,7 +187,7 @@
     </div>
     <div class="card">
       <h3>Open source</h3>
-      <p>The engine and the browser are open source under the Mozilla Public License 2.0, built from the web's specifications and tested against the Web Platform Tests.</p>
+      <p>The engine and the browser are open source under the Mozilla Public License 2.0.</p>
     </div>
   </div>
 </section>
@@ -195,12 +195,12 @@
 <section id="install">
   <h2>Install</h2>
   <ol class="steps">
-    <li><a href="https://github.com/snowlark-browser/snowlark/releases/download/preview-2026-11-27/snowlark-preview-2026-11-27-9a3adf93.zip">Download the zip</a> (50 MB, Windows 10 or 11, 64-bit).</li>
+    <li><a href="https://github.com/snowlark-browser/snowlark/releases/download/preview-2026-11-27/snowlark-preview-2026-11-27-9a3adf93.zip">Download the zip</a>.</li>
     <li>Unzip it anywhere and start <code>snowlark.exe</code>. There is no installer.</li>
     <li>If Windows SmartScreen shows &ldquo;Windows protected your PC&rdquo; the first time, choose <em>More info</em>, then <em>Run anyway</em>: a new build has to earn its reputation first.</li>
   </ol>
   <p class="small muted">Your bookmarks, history, settings and cookies are kept in <code>%LOCALAPPDATA%\Snowlark</code>. To remove Snowlark, delete the unzipped folder and that data folder. Older previews are on the <a href="https://github.com/snowlark-browser/snowlark/releases">releases page</a>.</p>
-  <p class="small muted">On Linux: <a href="https://github.com/snowlark-browser/snowlark/releases/download/preview-2026-11-27b-linux/snowlark-preview-2026-11-27-debcec4e-linux-x86_64.tar.gz">download the .tar.gz</a> (51 MB), unpack it anywhere and start <code>./snowlark</code> in the folder it makes; keep <code>libEGL.so</code> and <code>libGLESv2.so</code> beside it. It needs a Wayland desktop and glibc 2.43 or newer, and FFmpeg&rsquo;s libraries for video and audio. Your data is kept in <code>~/.config/snowlark</code>. Check it with <code>minisign -Vm &lt;archive&gt; -P RWQa8wCIad8uYF2fHaCkxdIMZwB6HZOHKswRPVw+/Fws2jguH278vfXs</code>. Not there yet on Linux: drags out of the window, the sandbox for page processes, and updates.</p>
+  <p class="small muted">On Linux: <a href="https://github.com/snowlark-browser/snowlark/releases/download/preview-2026-11-27b-linux/snowlark-preview-2026-11-27-debcec4e-linux-x86_64.tar.gz">download the .tar.gz</a> (51 MB), unpack it anywhere and start <code>./snowlark</code> in the folder it makes; keep <code>libEGL.so</code> and <code>libGLESv2.so</code> beside it. Video and audio need FFmpeg&rsquo;s libraries. Your data is kept in <code>~/.config/snowlark</code>. Check it with <code>minisign -Vm &lt;archive&gt; -P RWQa8wCIad8uYF2fHaCkxdIMZwB6HZOHKswRPVw+/Fws2jguH278vfXs</code>. Not there yet on Linux: drags out of the window, the sandbox for page processes, and updates.</p>
 </section>
 
 <section id="roadmap">
@@ -210,8 +210,8 @@
   <h3>In progress and up next</h3>
   <ul>
     <li><strong>Service workers and the Cache API:</strong> sites that work offline, installable web apps and faster repeat visits.</li>
-    <li><strong>Fixes for things you notice while browsing:</strong> dragging an element a page makes draggable selects text instead, a link opened in a background tab keeps its loading icon, an image opened on its own is not centred, and dragging the address to the desktop to make a shortcut.</li>
-    <li><strong>Linux:</strong> the browser runs on Linux in a Wayland window, with its tabs and address bar, each tab's pages in a process of their own, copy and paste with other programs, and several windows (V8 for Linux, text with fontconfig and HarfBuzz, painting with Skia); see the screenshots above. WebGL works too, and a Linux preview is out (above). The newer previews add input methods, drops from other programs, saved passwords kept with the desktop's Secret Service, file dialogs, video and audio through the system's FFmpeg, and the video streaming sites use (Media Source Extensions, MP4 and WebM), and are signed. Page processes now run in a sandbox; next, WebGL moves into a GPU process of its own, so they stay locked down.</li>
+    <li><strong>Fixes for things you notice while browsing:</strong> dragging links and images out of a page to other programs, and an image opened on its own is not centred.</li>
+    <li><strong>Linux:</strong> the preview runs in a Wayland window with tabs, several windows, each tab's pages in a process of their own, WebGL, copy and paste, drops from other programs, input methods, file dialogs, saved passwords kept with the desktop's Secret Service, and video and audio through the system's FFmpeg, streaming sites included. Since that preview, page processes run in a sandbox; next, WebGL moves into a GPU process of its own, so they stay locked down.</li>
     <li><strong>Shared workers,</strong> and the Web Platform Test areas where most tests still fail: CSS Values, CSS Masking, CSS Grid, CSS Sizing and Fetch.</li>
   </ul>
 
@@ -226,7 +226,7 @@
   <ul>
     <li><strong>Embedding:</strong> the engine offered to other applications as a library, a web view they can place in a window of their own. The browser comes first: embedding is added only where it costs the browser and its users nothing.</li>
     <li><strong>macOS,</strong> after Linux. The engine is kept free of platform code, so each platform needs its own painting, text, window, media and sandbox parts.</li>
-    <li><strong>Password manager, next stage:</strong> a Windows sign-in prompt where Windows Hello is not set up, and importing passwords exported from other browsers.</li>
+    <li><strong>Password manager, next stage:</strong> importing passwords exported from other browsers.</li>
     <li><strong>WebGPU,</strong> after WebGL.</li>
   </ul>
 </section>
@@ -240,11 +240,6 @@
       <div class="muted small">Web Platform Tests, of the subtests Chrome passes</div>
       <div class="big">90%</div>
       <div class="small muted">971,831 of the 1,084,620 subtests Chrome 156 passes on wpt.fyi, up from 77% on 24 November. The whole suite, 27 November 2026: 969,774 of 1,084,134 testharness subtests (89.5%) in 91,127 files, and 19,476 of 28,527 reftests (68.3%).</div>
-    </div>
-    <div class="card">
-      <div class="muted small">Speedometer 3.1, in the browser window</div>
-      <div class="big">31.6</div>
-      <div class="small muted">20 November, up from 19.0 on 15 November. Chrome on the same machine: 35.4.</div>
     </div>
     <div class="card">
       <div class="muted small">Speedometer 3.1, headless</div>
@@ -301,11 +296,9 @@
     <li>Fixes found by comparing about 700 popular pages with Chrome: Stripe's cards now have their height, hero animations on jhey.dev and gsap.com appear, and pages that waited on images handed to workers or on computed transforms show their content.</li>
     <li>Pages with stacked blur layers (<code>backdrop-filter</code>) no longer use gigabytes of memory, and scroll smoothly.</li>
     <li>The Cache API: <code>caches</code>, <code>CacheStorage</code> and <code>Cache</code>, the first part of service workers.</li>
-    <li>Google Maps draws its map with WebGL and zooms smoothly with the mouse wheel.</li>
-    <li>Google Maps' satellite view works, and zooms as smoothly as the map view.</li>
-    <li>WebGL extensions: 32 in WebGL 1 and 28 in WebGL 2.</li>
+    <li>Google Maps draws its map and its satellite view with WebGL, and both zoom smoothly with the mouse wheel.</li>
     <li>Fade-in animations that stayed invisible on pages with web fonts now play (a fix to a regression of 22 November).</li>
-    <li>WebGL 2, on OpenGL ES 3.0 through ANGLE, on pages, in <code>OffscreenCanvas</code> and in workers.</li>
+    <li>WebGL 2, on OpenGL ES 3.0 through ANGLE, on pages, in <code>OffscreenCanvas</code> and in workers, with 32 extensions in WebGL 1 and 28 in WebGL 2.</li>
     <li>CSS Shapes: text wraps along circles, polygons, images and gradients set with <code>shape-outside</code>.</li>
     <li>CSS anchor positioning: tooltips, menus and popovers placed next to the element they belong to.</li>
     <li>CSS Typed OM: <code>computedStyleMap()</code>, <code>attributeStyleMap</code> and <code>CSS.px()</code> and its family.</li>
