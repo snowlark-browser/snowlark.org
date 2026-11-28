@@ -211,7 +211,8 @@
   <ul>
     <li><strong>Service workers and the Cache API:</strong> sites that work offline, installable web apps and faster repeat visits.</li>
     <li><strong>Fixes for things you notice while browsing:</strong> dragging an element a page makes draggable selects text instead, a link opened in a background tab keeps its loading icon, an image opened on its own is not centred, and dragging the address to the desktop to make a shortcut.</li>
-    <li><strong>Linux:</strong> the browser runs on Linux in a Wayland window, with its tabs and address bar, each tab's pages in a process of their own, copy and paste with other programs, and several windows (V8 for Linux, text with fontconfig and HarfBuzz, painting with Skia); see the screenshots above. WebGL works too, and a Linux preview is out (above). The newer previews add input methods, drops from other programs, saved passwords kept with the desktop's Secret Service, file dialogs, video and audio through the system's FFmpeg, and the video streaming sites use (Media Source Extensions, MP4 and WebM), and are signed. Now: the sandbox for page processes and drawing on the GPU.</li>
+    <li><strong>Linux:</strong> the browser runs on Linux in a Wayland window, with its tabs and address bar, each tab's pages in a process of their own, copy and paste with other programs, and several windows (V8 for Linux, text with fontconfig and HarfBuzz, painting with Skia); see the screenshots above. WebGL works too, and a Linux preview is out (above). The newer previews add input methods, drops from other programs, saved passwords kept with the desktop's Secret Service, file dialogs, video and audio through the system's FFmpeg, and the video streaming sites use (Media Source Extensions, MP4 and WebM), and are signed. Page processes now run in a sandbox; next, WebGL moves into a GPU process of its own, so they stay locked down.</li>
+    <li><strong>Shared workers,</strong> and the Web Platform Test areas where most tests still fail: CSS Values, CSS Masking, CSS Grid, CSS Sizing and Fetch.</li>
   </ul>
 
   <h3>Next</h3>
@@ -223,6 +224,7 @@
 
   <h3>Later</h3>
   <ul>
+    <li><strong>Embedding:</strong> the engine offered to other applications as a library, a web view they can place in a window of their own. The browser comes first: embedding is added only where it costs the browser and its users nothing.</li>
     <li><strong>macOS,</strong> after Linux. The engine is kept free of platform code, so each platform needs its own painting, text, window, media and sandbox parts.</li>
     <li><strong>Password manager, next stage:</strong> a Windows sign-in prompt where Windows Hello is not set up, and importing passwords exported from other browsers.</li>
     <li><strong>WebGPU,</strong> after WebGL.</li>
@@ -236,8 +238,8 @@
   <div class="cards">
     <div class="card">
       <div class="muted small">Web Platform Tests, of the subtests Chrome passes</div>
-      <div class="big">89%</div>
-      <div class="small muted">968,833 of the 1,084,620 subtests Chrome 156 passes on wpt.fyi, up from 77% on 24 November. The whole suite, 25 November 2026: 965,950 of 1,084,533 testharness subtests (89.1%) in 91,127 files, and 18,994 of 28,527 reftests (66.6%).</div>
+      <div class="big">90%</div>
+      <div class="small muted">971,831 of the 1,084,620 subtests Chrome 156 passes on wpt.fyi, up from 77% on 24 November. The whole suite, 27 November 2026: 969,774 of 1,084,134 testharness subtests (89.5%) in 91,127 files, and 19,476 of 28,527 reftests (68.3%).</div>
     </div>
     <div class="card">
       <div class="muted small">Speedometer 3.1, in the browser window</div>
@@ -260,37 +262,37 @@
   </div>
 
   <h3>Web Platform Tests by area</h3>
-  <p class="small muted">Testharness subtests per area, from the full run of 25 November 2026 (reftests are counted in the total above).</p>
+  <p class="small muted">Testharness subtests per area, from the full run of 27 November 2026 (reftests are counted in the total above).</p>
   <table>
     <thead><tr><th>Area</th><th class="num">Passing</th><th class="num">Subtests</th><th class="num">Share</th></tr></thead>
     <tbody>
       <tr><td>URL</td><td class="num">11,006</td><td class="num">11,006</td><td class="num">100.0%</td></tr>
       <tr><td>Encoding</td><td class="num">23,643</td><td class="num">23,662</td><td class="num">99.9%</td></tr>
-      <tr><td>WebAssembly</td><td class="num">191,254</td><td class="num">191,679</td><td class="num">99.8%</td></tr>
-      <tr><td>Selection API</td><td class="num">34,279</td><td class="num">34,444</td><td class="num">99.5%</td></tr>
+      <tr><td>CSS Shapes</td><td class="num">7,745</td><td class="num">7,760</td><td class="num">99.8%</td></tr>
+      <tr><td>WebAssembly</td><td class="num">190,831</td><td class="num">191,256</td><td class="num">99.8%</td></tr>
+      <tr><td>Selection API</td><td class="num">34,280</td><td class="num">34,444</td><td class="num">99.5%</td></tr>
       <tr><td>WebGL</td><td class="num">4,249</td><td class="num">4,270</td><td class="num">99.5%</td></tr>
-      <tr><td>CSS Shapes</td><td class="num">7,689</td><td class="num">7,760</td><td class="num">99.1%</td></tr>
-      <tr><td>IndexedDB</td><td class="num">3,125</td><td class="num">3,167</td><td class="num">98.7%</td></tr>
-      <tr><td>DOM</td><td class="num">62,577</td><td class="num">63,700</td><td class="num">98.2%</td></tr>
+      <tr><td>IndexedDB</td><td class="num">3,089</td><td class="num">3,131</td><td class="num">98.7%</td></tr>
+      <tr><td>DOM</td><td class="num">62,574</td><td class="num">63,700</td><td class="num">98.2%</td></tr>
       <tr><td>Shadow DOM</td><td class="num">15,058</td><td class="num">15,351</td><td class="num">98.1%</td></tr>
-      <tr><td>JavaScript (test262)</td><td class="num">52,123</td><td class="num">53,543</td><td class="num">97.3%</td></tr>
-      <tr><td>SVG</td><td class="num">13,951</td><td class="num">14,381</td><td class="num">97.0%</td></tr>
+      <tr><td>JavaScript (test262)</td><td class="num">51,982</td><td class="num">53,404</td><td class="num">97.3%</td></tr>
+      <tr><td>SVG</td><td class="num">13,947</td><td class="num">14,381</td><td class="num">97.0%</td></tr>
       <tr><td>Editing</td><td class="num">113,002</td><td class="num">116,624</td><td class="num">96.9%</td></tr>
       <tr><td>Streams</td><td class="num">2,804</td><td class="num">2,916</td><td class="num">96.2%</td></tr>
-      <tr><td>CSS Fonts</td><td class="num">8,659</td><td class="num">9,040</td><td class="num">95.8%</td></tr>
-      <tr><td>CSS Backgrounds</td><td class="num">6,607</td><td class="num">6,965</td><td class="num">94.9%</td></tr>
+      <tr><td>CSS Fonts</td><td class="num">8,666</td><td class="num">9,040</td><td class="num">95.9%</td></tr>
+      <tr><td>CSS Backgrounds</td><td class="num">6,609</td><td class="num">6,965</td><td class="num">94.9%</td></tr>
       <tr><td>CSS Anchor Positioning</td><td class="num">13,039</td><td class="num">13,890</td><td class="num">93.9%</td></tr>
-      <tr><td>CSS Typed OM</td><td class="num">12,306</td><td class="num">13,156</td><td class="num">93.5%</td></tr>
-      <tr><td>CSS Flexbox</td><td class="num">5,344</td><td class="num">5,800</td><td class="num">92.1%</td></tr>
-      <tr><td>CSS Selectors</td><td class="num">5,832</td><td class="num">6,385</td><td class="num">91.3%</td></tr>
-      <tr><td>HTML</td><td class="num">141,311</td><td class="num">155,309</td><td class="num">91.0%</td></tr>
-      <tr><td>Web Audio</td><td class="num">5,187</td><td class="num">5,742</td><td class="num">90.3%</td></tr>
-      <tr><td>CSS Sizing</td><td class="num">5,885</td><td class="num">6,915</td><td class="num">85.1%</td></tr>
-      <tr><td>Fetch</td><td class="num">7,838</td><td class="num">9,256</td><td class="num">84.7%</td></tr>
-      <tr><td>CSS Grid</td><td class="num">14,606</td><td class="num">17,547</td><td class="num">83.2%</td></tr>
-      <tr><td>Web Cryptography</td><td class="num">53,209</td><td class="num">70,549</td><td class="num">75.4%</td></tr>
-      <tr><td>CSS Masking</td><td class="num">4,918</td><td class="num">6,892</td><td class="num">71.4%</td></tr>
-      <tr><td>CSS Values</td><td class="num">6,371</td><td class="num">10,584</td><td class="num">60.2%</td></tr>
+      <tr><td>CSS Typed OM</td><td class="num">12,247</td><td class="num">13,082</td><td class="num">93.6%</td></tr>
+      <tr><td>CSS Flexbox</td><td class="num">5,331</td><td class="num">5,785</td><td class="num">92.2%</td></tr>
+      <tr><td>CSS Selectors</td><td class="num">5,847</td><td class="num">6,385</td><td class="num">91.6%</td></tr>
+      <tr><td>HTML</td><td class="num">141,345</td><td class="num">155,274</td><td class="num">91.0%</td></tr>
+      <tr><td>Web Audio</td><td class="num">5,191</td><td class="num">5,742</td><td class="num">90.4%</td></tr>
+      <tr><td>CSS Sizing</td><td class="num">6,141</td><td class="num">6,911</td><td class="num">88.9%</td></tr>
+      <tr><td>Fetch</td><td class="num">7,831</td><td class="num">9,252</td><td class="num">84.6%</td></tr>
+      <tr><td>CSS Grid</td><td class="num">14,590</td><td class="num">17,527</td><td class="num">83.2%</td></tr>
+      <tr><td>Web Cryptography</td><td class="num">54,307</td><td class="num">70,751</td><td class="num">76.8%</td></tr>
+      <tr><td>CSS Masking</td><td class="num">4,926</td><td class="num">6,892</td><td class="num">71.5%</td></tr>
+      <tr><td>CSS Values</td><td class="num">7,430</td><td class="num">10,500</td><td class="num">70.8%</td></tr>
     </tbody>
   </table>
 
